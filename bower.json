@@ -1,0 +1,8 @@
+{
+  "name": "safe_web_sample",
+  "dependencies": {
+    "tweetnacl": "*",
+    "jquery": "2.2.1",
+    "base64-js": "*"
+  }
+}
