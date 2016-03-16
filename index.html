@@ -9,8 +9,8 @@
       var symmKey;
       var symmNonce;
       var authorise = function() {
-        var assymKeys = nacl.box.keyPair();
-        var assymNonce = nacl.randomBytes(nacl.box.nonceLength);
+        var asymKeys = nacl.box.keyPair();
+        var asymNonce = nacl.randomBytes(nacl.box.nonceLength);
         var authPayload = {
           app: {
             id: 'com.samp-company.web',
@@ -18,8 +18,8 @@
             vendor: 'Sample-Company',
             version: '0.1'
           },
-          publicKey: base64js.fromByteArray(assymKeys.publicKey),
-          nonce: base64js.fromByteArray(assymNonce),
+          publicKey: base64js.fromByteArray(asymKeys.publicKey),
+          nonce: base64js.fromByteArray(asymNonce),
           permissions: []
         };
 
@@ -35,7 +35,7 @@
           var launcherPubKey = base64js.toByteArray(response.publicKey);
           authToken = response.token;
           var encryptedKey = base64js.toByteArray(response.encryptedKey);
-          var key = nacl.box.open(encryptedKey, assymNonce, launcherPubKey, assymKeys.secretKey);
+          var key = nacl.box.open(encryptedKey, asymNonce, launcherPubKey, asymKeys.secretKey);
           symmKey = key.slice(0, nacl.secretbox.keyLength);
           symmNonce = key.slice(nacl.secretbox.keyLength);
           alert('Obtained Auth token');
